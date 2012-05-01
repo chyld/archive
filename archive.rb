@@ -110,13 +110,13 @@ puts "splitting files"
 `rm -rf #{output_file}`
 
 # upload encrypted file to the cloud
-puts "Copying #{output_file}.chyld to Dropbox"
+puts "copying #{output_file}.chyld.p-* to Dropbox"
 `cp #{output_file}.chyld.p-* ~/Dropbox`
-puts "Copying #{output_file}.chyld to Skydrive"
+puts "copying #{output_file}.chyld.p-* to Skydrive"
 `cp #{output_file}.chyld.p-* ~/Skydrive`
-puts "Copying #{output_file}.chyld to Google Drive"
+puts "copying #{output_file}.chyld.p-* to Google Drive"
 `mv #{output_file}.chyld.p-* ~/Google\\ Drive`
 
 # done
-puts "Success!"
+puts "success!"
 
