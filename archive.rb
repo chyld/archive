@@ -44,6 +44,23 @@ def crypto(file, password, encrypt)
   end
 end
 
+def copy_to_service(mode, service, output_file, filehint)
+  archive_dir = "~/#{service}/archive"
+  puts "creating archive directory : #{archive_dir}"
+  `mkdir #{archive_dir}`
+
+  file_dir = "#{archive_dir}/#{filehint}"
+  puts "creating file directory : #{file_dir}"
+  `mkdir #{file_dir}`
+
+  output_dir = "#{file_dir}/#{output_file}"
+  puts "creating output directory : #{output_dir}"
+  `mkdir #{output_dir}`
+
+  puts "#{mode} #{output_file}.chyld.p-* to #{output_dir}"
+  `#{mode} #{output_file}.chyld.p-* #{output_dir}`
+end
+
 ### ------------------------------------------------------------------------ ###
 
 puts `clear`
@@ -110,12 +127,9 @@ puts "splitting files"
 `rm -rf #{output_file}`
 
 # upload encrypted file to the cloud
-puts "copying #{output_file}.chyld.p-* to Dropbox"
-`cp #{output_file}.chyld.p-* ~/Dropbox`
-puts "copying #{output_file}.chyld.p-* to Skydrive"
-`cp #{output_file}.chyld.p-* ~/Skydrive`
-puts "copying #{output_file}.chyld.p-* to Google Drive"
-`mv #{output_file}.chyld.p-* ~/Google\\ Drive`
+copy_to_service("cp", "Dropbox", output_file, filehint)
+copy_to_service("cp", "Skydrive", output_file, filehint)
+copy_to_service("mv", "Google\\ Drive", output_file, filehint)
 
 # done
 puts "success!"
