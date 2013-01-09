@@ -19,7 +19,7 @@ def read_directory(directory)
 end
 
 def progress_display
-  log ['+', '-'].sample
+  log(['+', '-'].sample, false)
 end
 
 def safe_directory?(object)
@@ -119,9 +119,9 @@ def manifest_log(object, parent, file_type, file_hash, sha1_hash)
   file_hash.delete(object)
 end
 
-def log(message)
+def log(message, save = true)
   puts message
-  File.open("/tmp/#{@time_stamp}.arq.log", 'a') {|f| f.write "#{message}\n"}
+  File.open("/tmp/#{@time_stamp}.arq.log", 'a') {|f| f.write "#{message}\n"} if save
 end
 
 puts `clear`
