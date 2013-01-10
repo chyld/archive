@@ -124,7 +124,7 @@ def log(message, save = true)
   File.open("/tmp/#{@time_stamp}.arq.log", 'a') {|f| f.write "#{message}\n"} if save
 end
 
-def fingerprint_and_rename_fragments(host_dir, describe)
+def fingerprint_and_rename_fragments(host_dir)
   Dir.chdir(host_dir)
   Dir.entries(Dir.pwd).each do |oldfile|
     if !oldfile.start_with?('.')
@@ -170,8 +170,8 @@ tempname = "#{@time_stamp}.#{engines.count}"
 sha1hash = compute_hash(tempname)
 fullname = "#{@time_stamp}.#{describe}.#{sha1hash}"
 `mkdir #{fullname}`
-`split -b 300m #{tempname} #{fullname}/#{@time_stamp}.#{describe}.frag-`
+`split -b 500m #{tempname} #{fullname}/#{@time_stamp}.#{describe}.frag-`
 (0..engines.count).each {|i| `rm #{@time_stamp}.#{i}`}
-fingerprint_and_rename_fragments(fullname, describe)
+fingerprint_and_rename_fragments(fullname)
 
 puts "goodbye"
