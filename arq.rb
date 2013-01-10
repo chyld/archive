@@ -140,7 +140,7 @@ password = gets.strip
 puts 'password mutator lambda?'
 puts '------------------------'
 puts 'variables: file, password, mutator, method, input, output'
-puts 'examples:  \"abc\"*output or input**output or method*3'
+puts "examples:  'test'*(input**output)"
 mutator  = gets.strip
 puts `openssl enc --help`
 puts 'encryption engines, comma separated, no spaces?'
