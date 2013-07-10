@@ -31,4 +31,10 @@ if response == 'c'
 end
 
 if response == 'a'
+  print 'archive name: '
+  archive = gets.chomp
+  print 'archive extension: '
+  ext = gets.chomp
+  hash = Manager.compute_hash(archive + '.' + ext)
+  `mv #{archive}.#{ext} #{archive}-#{hash}.#{ext}`
 end
