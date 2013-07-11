@@ -10,7 +10,7 @@ puts `ruby -v`
 print 'directory: '
 directory = gets.chomp
 
-print '(f)ingerprint, (c)compare or (a)rchive: '
+print '(f)ingerprint, (c)compare, (s)ha1 or (a)rchive: '
 response = gets.chomp
 
 if response == 'f'
@@ -28,6 +28,13 @@ if response == 'c'
 
   compare = Compare.new(directory, old_db, new_db)
   compare.analyze
+end
+
+if response == 's'
+  print 'filename: '
+  filename = gets.chomp
+  hash = Manager.compute_hash(filename)
+  puts "#{filename} -> #{hash}"
 end
 
 if response == 'a'
