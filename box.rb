@@ -46,7 +46,7 @@ if response == 'a'
   puts tar
   `#{tar}`
 
-  aes = "openssl enc -aes-256-cbc -salt -pass pass:#{password} -in #{time_stamp}.tar.gz -out #{time_stamp}.chyld"
+  aes = "openssl enc -aes-256-cbc -salt -pass pass:'#{password}' -in #{time_stamp}.tar.gz -out #{time_stamp}.chyld"
   puts aes
   `#{aes}`
 
