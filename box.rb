@@ -38,10 +38,24 @@ if response == 's'
 end
 
 if response == 'a'
-  print 'archive name: '
-  archive = gets.chomp
-  print 'archive extension: '
-  ext = gets.chomp
-  hash = Manager.compute_hash(archive + '.' + ext)
-  `mv #{archive}.#{ext} #{archive}-#{hash}.#{ext}`
+  print 'password: '
+  password = gets.chomp
+  time_stamp = Time.now.strftime("%Y%m%d")
+
+  tar = "tar -czvf #{time_stamp}.tar.gz #{directory}"
+  puts tar
+  `#{tar}`
+
+  aes = "openssl enc -aes-256-cbc -salt -pass pass:#{password} -in #{time_stamp}.tar.gz -out #{time_stamp}.chyld"
+  puts aes
+  `#{aes}`
+
+  hash = Manager.compute_hash("#{time_stamp}.chyld")
+  cmd = "mv #{time_stamp}.chyld #{time_stamp}-#{hash}.chyld"
+  puts cmd
+  `#{cmd}`
+
+  cmd = "rm #{time_stamp}.tar.gz"
+  puts cmd
+  `#{cmd}`
 end
